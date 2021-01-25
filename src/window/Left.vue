@@ -21,7 +21,7 @@ export default {
     Item
   },
   setup(){
-    const menu_collapsed = inject("collapsed", false);
+    const menu_collapsed = inject("collapsed", true);
     return {
       menu_collapsed
     }

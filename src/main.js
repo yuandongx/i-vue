@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 //import Vuex from "vuex";
+import axios from "axios";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./libs/router";
@@ -8,6 +9,11 @@ import { Layout,
          Button,
          Row,
          Divider,
+         Input,
+         InputNumber,
+         Table,
+         Modal,
+         Form,
          Col } from "ant-design-vue";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -32,13 +38,21 @@ router.afterEach(() => {
   NProgress.done();
 });
 
-//const store = new Vuex.Store({ modules });
-createApp(App)
-  .use(router)
-  .use(Button)
-  .use(Layout)
-  .use(Menu)
-  .use(Row)
-  .use(Col)
-  .use(Divider)
-  .mount("#app");
+const app = createApp(App)
+            .use(router)
+            .use(Table)
+            .use(Form)
+            .use(Modal)
+            .use(Input)
+            .use(InputNumber)
+            .use(Button)
+            .use(Layout)
+            .use(Menu)
+            .use(Row)
+            .use(Col)
+            .use(Divider)
+axios.defaults.withCredentials = false;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.baseURL = "http://127.0.0.1:8888";
+app.config.globalProperties.http =  axios;
+app.mount("#app");
