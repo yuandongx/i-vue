@@ -1,0 +1,25 @@
+name: Sync
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  sync-branches:
+    runs-on: ubuntu-latest
+    name: Catching up branches
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Create Catchup PR
+        uses: shubhsherl/create-catchup-pr@v0.1.0
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_REPO: ${{github.repository}}
+          SOURCE_REPO: "vue3"
+          SOURCE_BRANCH: "devel"
+          TARGET_BRANCH: "devel"

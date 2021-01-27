@@ -17,11 +17,16 @@
     </div>
 </template>
 <script>
+import { Button, Col, Divider, Row } from "ant-design-vue";
 import {provide, ref} from "vue"
 import display from "./display.vue";
 import add_new_host from "./add"
 export default {
   components:{
+    [Button.name]: Button,
+    [Col.name]: Col,
+    [Row.name]: Row,
+    [Divider.name]: Divider,
     "display": display,
     "add-new-host": add_new_host
   },

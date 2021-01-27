@@ -18,7 +18,7 @@ export default {
       }
   },
   components: {
-    Item
+    Item,
   },
   setup(){
     const menu_collapsed = inject("collapsed", true);

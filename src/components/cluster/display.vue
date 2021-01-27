@@ -45,23 +45,36 @@
       </template>
     </template>
     <template #moreOperations>
+      <Tooltip title="修改">
       <EditTwoTone />
+      </Tooltip>
       <divide type="vertical"/>
+      <Tooltip title="删除">
       <DeleteTwoTone />
+      </Tooltip>
+      <divide type="vertical"/>
+      <Tooltip title="终端交互">
+      <InteractionTwoTone/>
+      </Tooltip>
     </template>
   </a-table>
 </template>
 
 <script>
-import { SearchOutlined, DeleteTwoTone, EditTwoTone } from '@ant-design/icons-vue';
-import {Divider} from "ant-design-vue";
+import { SearchOutlined, DeleteTwoTone, EditTwoTone, InteractionTwoTone } from '@ant-design/icons-vue';
+import {Divider, Tooltip, Table, Button, Input} from "ant-design-vue";
 const data = [];
 export default {
   components: {
+    [Button.name]: Button,
+    [Input.name]: Input,
+    [Table.name]: Table,
     SearchOutlined,
     DeleteTwoTone,
     EditTwoTone,
+    InteractionTwoTone,
     divide: Divider,
+    Tooltip,
   },
   data() {
     return {
@@ -223,5 +236,9 @@ export default {
 .highlight {
   background-color: rgb(255, 192, 105);
   padding: 0px;
+}
+.menustyle{
+  border: 0em;
+  height: 10em;
 }
 </style>

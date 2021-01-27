@@ -46,7 +46,7 @@ export default {
   components: {
     Left,
     MenuUnfoldOutlined,
-    MenuFoldOutlined
+    MenuFoldOutlined,
   },
   setup(){
     const collapsed = ref(true);
