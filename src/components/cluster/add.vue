@@ -52,7 +52,6 @@
 </template>
 <script>
 import {inject} from "vue";
-
 export default {
     // computed:{
     //     [Select.name]: Select,

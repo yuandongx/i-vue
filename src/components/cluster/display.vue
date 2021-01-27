@@ -63,6 +63,7 @@
 <script>
 import { SearchOutlined, DeleteTwoTone, EditTwoTone, InteractionTwoTone } from '@ant-design/icons-vue';
 import {Divider, Tooltip} from "ant-design-vue";
+
 const data = [];
 export default {
   components: {
@@ -71,7 +72,7 @@ export default {
     EditTwoTone,
     InteractionTwoTone,
     divide: Divider,
-    Tooltip,
+    Tooltip,l
   },
   data() {
     return {
