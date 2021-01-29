@@ -135,17 +135,27 @@ export default {
         this.fetchGroups();
     },
     methods: {
-        handleAddOk: function(){
+        handleAddOk: async function(){
             this.$refs.ruleForm.validate().then(()=>{
-                this.http.post("/api/host/add", this.form).then(function(response){
-                    console.log(response);
-                    message.success(response.data);
-                }).catch(function(error){
-                    message.error(error);
-                });
+                // this.http.post("/api/host/add", this.form).then(function(response){
+                //     message.success(response.data);
+                // }).catch(function(error){
+                //     message.error(error);
+                // });
+                this.update();
+            });
+        },
+        update: async function(){
+            // 需要等待上传结果， 成功之后更新表
+            try {
+                const response = await this.http.post("/api/host/add", this.form)
+                message.success(response.data);
+                this.$emit("redisplay");
                 this.addHostVisiable = false;
                 this.$refs.ruleForm.resetFields();
-            });
+            } catch(error){
+                message.error(error);
+            }
         },
         handleAddCancle: function(){
         this.addHostVisiable = false;

@@ -217,7 +217,6 @@ export default {
       this.loading = true;
       this.http.get("/api/host/get", params).then(({data})=>{
         this.data = data;
-        
       let names = [];
       data.forEach((item)=>{
           if(!names.includes(item.hostgroup)){
