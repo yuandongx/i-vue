@@ -1,7 +1,7 @@
 <template>
   <a-menu mode="inline" theme="dark" :inline-collapsed="menu_collapsed">
     <Item
-    v-for="item  in items"
+    v-for="item in items"
     :key="item.name"
     :itemData="item"
     ></item>

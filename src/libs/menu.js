@@ -13,28 +13,24 @@ const menus = [
     path: "/dashboard",
     title: "主页",
     icon: DashboardOutlined,
-    children:[]
 },
 {
     name: "cluster",
     path: "/cluster",
     title: "资产管理",
     icon: ClusterOutlined,
-    children:[] 
 },
 {
     name: "schedule",
     path: "/schedule",
     title: "任务管理",
     icon: ScheduleOutlined,
-    children:[] 
 },
 {
     name: "deployment",
     path: "/deployment",
     title: "安装部署",
     icon: DeploymentUnitOutlined,
-    children:[] 
 },
 {
     name: "setting",
@@ -45,7 +41,7 @@ const menus = [
         {
             title: "访问凭证",
             name: "credentials",
-            path: "/setting/credentials"
+            path: "/setting/credentials",
         }
     ] 
 },
