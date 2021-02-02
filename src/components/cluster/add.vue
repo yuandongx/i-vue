@@ -137,18 +137,18 @@ export default {
     methods: {
         handleAddOk: async function(){
             this.$refs.ruleForm.validate().then(()=>{
-                // this.http.post("/api/host/add", this.form).then(function(response){
-                //     message.success(response.data);
-                // }).catch(function(error){
-                //     message.error(error);
-                // });
-                this.update();
+                this.add();
             });
         },
-        update: async function(){
+        add: async function(){
             // 需要等待上传结果， 成功之后更新表
             try {
-                const response = await this.http.post("/api/host/add", this.form)
+                let response = null;
+                if (this.form.id !== undefined){
+                    response = await this.http.patch("/api/host", this.form)
+                } else {
+                    response = await this.http.post("/api/host", this.form)
+                }
                 message.success(response.data);
                 this.$emit("redisplay");
                 this.addHostVisiable = false;
@@ -175,12 +175,23 @@ export default {
             })
         },
         fetchGroups: function(){
-            this.http.get("/api/host/groups").then(({data})=>{
+            this.http.get("/api/host-groups").then(({data})=>{
                 this.groups = data;
             })
         },
         addItem() {
           this.newGroupModal = true;
+        },
+        update: function(row){
+            this.addHostVisiable = true;
+            this.form = row;
+            // this.form.hostgroup = row.hostgroup;
+            // this.form.hostip = row.hostip;
+            // this.form.port = row.port;
+            // this.form.credential = row.credential;
+            // this.form.description = row.description;
+
+
         },
     }
 }

@@ -7,7 +7,7 @@ import { Layout,
          Menu, } from "ant-design-vue";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-//import modules from "./store/index";
+import "default-passive-events";
 
 NProgress.configure({
   easing: "ease",
@@ -34,6 +34,8 @@ const app = createApp(App)
             .use(Menu)
 axios.defaults.withCredentials = false;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.delete['Content-Type'] = 'application/json';
+axios.defaults.headers.patch['Content-Type'] = 'application/json';
 axios.defaults.baseURL = "http://127.0.0.1:8888";
 app.config.globalProperties.http =  axios;
 app.mount("#app");

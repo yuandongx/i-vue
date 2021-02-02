@@ -3,7 +3,8 @@ import {
     ClusterOutlined,
     ScheduleOutlined,
     DeploymentUnitOutlined,
-    SettingOutlined
+    SettingOutlined,
+    TeamOutlined
   } from "@ant-design/icons-vue";
 
 const menus = [
@@ -40,6 +41,13 @@ const menus = [
     path: "/setting",
     title: "系统设置",
     icon: SettingOutlined,
+    children:[] 
+},
+{
+    name: "team",
+    path: "/team",
+    title: "成员管理",
+    icon: TeamOutlined,
     children:[] 
 }
 ]

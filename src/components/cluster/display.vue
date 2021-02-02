@@ -17,10 +17,10 @@
           @click="handleSearch(selectedKeys, confirm, column.dataIndex)"
         >
           <template #icon><SearchOutlined /></template>
-          Search
+          查找
         </a-button>
         <a-button size="small" style="width: 90px" @click="handleReset(clearFilters)">
-          Reset
+          重置
         </a-button>
       </div>
     </template>
@@ -44,13 +44,19 @@
         {{ text }}
       </template>
     </template>
-    <template #moreOperations>
+    <template #statusTags="{ text }">
+      <span>
+        <a-tag :color="tagColor(text)">{{ tagMsg(text) }}</a-tag>
+      </span>
+    </template>
+    <template #moreOperations="{ record }">
+
       <Tooltip title="修改">
-      <EditTwoTone />
+      <EditTwoTone @click="modify(record)"/>
       </Tooltip>
       <divide type="vertical"/>
       <Tooltip title="删除">
-      <DeleteTwoTone />
+      <DeleteTwoTone @click="deleteHosts(record)"/>
       </Tooltip>
       <divide type="vertical"/>
       <Tooltip title="终端交互">
@@ -61,14 +67,19 @@
 </template>
 
 <script>
-import { SearchOutlined, DeleteTwoTone, EditTwoTone, InteractionTwoTone } from '@ant-design/icons-vue';
-import {Divider, Tooltip, Table, Button, Input} from "ant-design-vue";
+import { createVNode } from "vue";
+import { SearchOutlined, DeleteTwoTone, EditTwoTone, InteractionTwoTone, ExclamationCircleOutlined } from '@ant-design/icons-vue';
+import {Divider, Modal, Tooltip, Table, Button, Input, Tag, message} from "ant-design-vue";
 const data = [];
+const colors = ["green", "default", "red", "warning"];
+const tagmsgs = ["验证成功", "未验证", "主机不可达", "认证失败"];
 export default {
   components: {
+    [Tag.name]: Tag,
     [Button.name]: Button,
     [Input.name]: Input,
     [Table.name]: Table,
+    [Modal.name]: Modal,
     SearchOutlined,
     DeleteTwoTone,
     EditTwoTone,
@@ -86,24 +97,26 @@ export default {
       selectIds: [],
       rowSelections:{
         onChange: (selectedRowKeys, selectedRows) => {
+          console.log(1, selectedRowKeys);
+          console.log(11, selectedRows);
           this.selectIds = selectedRowKeys.length === selectedRows.length ? selectedRows.map(item=> item.id):[]
         },
-        // onSelect: (record, selected) => {
-        //   if (selected && !this.selectIds.includes()) {
-        //       this.selectIds.push(record.id);
-        //   } else if(!selected){
-        //     this.selectIds = this.selectIds.filter(item => item != record.id);
-        //   }
-        // },
-        // onSelectAll: (selected, selectedRows) => {
-        //   let selections = [];
-        //   if (selected) {
-        //     selectedRows.forEach((item)=>{
-        //       selections.push(item.id);
-        //     });
-        //     this.selectIds = selections;
-        //   }
-        // },
+        onSelect: (record, selected) => {
+          if (selected && !this.selectIds.includes(record.id)) {
+              this.selectIds.push(record.id);
+          } else if(!selected){
+            this.selectIds = this.selectIds.filter(item => item != record.id);
+          }
+        },
+        onSelectAll: (selected, selectedRows) => {
+          let selections = [];
+          if (selected) {
+            selectedRows.forEach((item)=>{
+              selections.push(item.id);
+            });
+            this.selectIds = selections;
+          }
+        },
       },
       columns:  [
         {
@@ -188,6 +201,7 @@ export default {
           title: '主机状态',
           dataIndex: 'statuscode',
           key: 'statuscode',
+          slots:{customRender: "statusTags"},
         },
         {
           title: '操作',
@@ -208,14 +222,67 @@ export default {
       this.searchedColumn = dataIndex;
       this.$forceUpdate();
     },
-
+    tagColor: (text)=>{
+      if (text < colors.length){
+        return colors[text];
+      }
+      return "default";
+    },
+    tagMsg: (text) => {
+      if (text < tagmsgs.length){
+        return tagmsgs[text];
+      }
+      return tagmsgs[1];
+    },
     handleReset(clearFilters) {
       clearFilters();
       this.searchText = '';
     },
+    delOnOK: function(ids){
+      const data = ids.map(id => ({id}));
+      // 此处需要转JSON，不然不会携带 Content-Type
+      this.http.delete("/api/host", { headers: { "Content-Type": "application/json" }, data: JSON.stringify(data) }).then(({ data }) => {
+        message.success(data);
+      }).catch(()=>{
+        message.error("删除失败。");
+      }).finally(()=>{
+        this.fetch();
+      });
+      Modal.destroyAll();
+    },
+    delOnCancel: function(){
+      Modal.destroyAll();
+    },
+    modify: function(param){
+      this.$emit("update", param);
+    },
+    deleteHosts: function(host={}){
+      if (host.length == {} && this.selectIds.length == 0){
+        message.warning("未选中任何主机");
+        return;
+      }
+
+      let msg = "是否确认删除选该主机信息？";
+      let willDeletes = [];
+      if (host.id !== undefined){
+        willDeletes = [host.id];
+      } else {
+        msg = "是否确认删除选中的 " + this.selectIds.length + " 个主机信息？";
+        willDeletes = this.selectIds;
+      }
+      Modal.confirm({
+        title: "确认删除",
+        content: msg,
+        okText: "确定",
+        cancelText: "取消",
+        icon: createVNode(ExclamationCircleOutlined),
+        onOk: () => this.delOnOK(willDeletes),
+        onCancel: this.delOnCancel,
+      });
+    },
     fetch(params={}){
       this.loading = true;
-      this.http.get("/api/host/get", params).then(({data})=>{
+      this.http.get("/api/host", params).then(({data})=>{
         this.data = data;
       let names = [];
       data.forEach((item)=>{

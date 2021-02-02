@@ -118,7 +118,7 @@ export default {
             let form = new FormData();
             form.append("file", data.file);
             form.append("commit", "no");
-            this.http.post("/api/host/upload", form).then((result) => {
+            this.http.post("/api/host-upload", form).then((result) => {
                 // console.log(result);
                 let {ok, err, skip, alias} = result.data;
                 this.file_alias = alias;
