@@ -18,14 +18,14 @@ const menus = [
 {
     name: "cluster",
     path: "/cluster",
-    title: "资产",
+    title: "资产管理",
     icon: ClusterOutlined,
     children:[] 
 },
 {
     name: "schedule",
     path: "/schedule",
-    title: "任务调度",
+    title: "任务管理",
     icon: ScheduleOutlined,
     children:[] 
 },
@@ -39,16 +39,40 @@ const menus = [
 {
     name: "setting",
     path: "/setting",
-    title: "系统设置",
+    title: "环境变量",
     icon: SettingOutlined,
-    children:[] 
+    children:[
+        {
+            title: "访问凭证",
+            name: "credentials",
+            path: "/setting/credentials"
+        }
+    ] 
 },
 {
     name: "team",
     path: "/team",
     title: "成员管理",
     icon: TeamOutlined,
-    children:[] 
+    children:[
+        {
+            title: "信息管理",
+            name: "information",
+            path: "/team/information",
+            children: [
+                {
+                    title: "信息变更",
+                    name: "update",
+                    path: "/team/information/update",
+                },
+                {
+                    title: "权限管理",
+                    name: "privilege",
+                    path: "/team/information/privilege",
+                }
+            ]
+        }
+    ] 
 }
 ]
 export default menus;
