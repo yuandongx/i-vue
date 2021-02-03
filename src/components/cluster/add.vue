@@ -185,13 +185,6 @@ export default {
         update: function(row){
             this.addHostVisiable = true;
             this.form = row;
-            // this.form.hostgroup = row.hostgroup;
-            // this.form.hostip = row.hostip;
-            // this.form.port = row.port;
-            // this.form.credential = row.credential;
-            // this.form.description = row.description;
-
-
         },
     }
 }

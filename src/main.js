@@ -7,7 +7,6 @@ import { Layout,
          Menu, } from "ant-design-vue";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import "default-passive-events";
 
 NProgress.configure({
   easing: "ease",
