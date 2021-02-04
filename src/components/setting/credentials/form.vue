@@ -1,6 +1,5 @@
 <template>
     <a-modal destroyOnClose :visible="formVisibel" title="添加访问凭证" okText="确定" cancelText="取消" @ok="onOk" @cancel="onCancel">
-        <!-- {{ showForm }} -->
         <a-form :model="form" ref="aform" :label-col="labelCol" :wrapper-col="wrapperCol" labelAlign="right" :rules="rules">
             <a-form-item label="标识" name="name"><a-input v-model:value="form.name"/></a-form-item>
             <a-form-item label="用户名" name="username"><a-input v-model:value="form.username"/></a-form-item>
