@@ -6,13 +6,14 @@
     <a-col :span="4"><input-serch placeholder="输入信息以查找" enter-button="查找"/> </a-col>
   </a-row>
   <a-divider></a-divider>
-  <table-dislpay/>
-  <add-form :showForm="showAdd"/>
+  <table-dislpay @update="onUpdate" ref="display"/>
+  <add-form ref="addForm" @refresh="refresh"/>
 </template>
 <script>
 import {Button, Input, Row, Col, Divider} from "ant-design-vue";
 import table from "./table.vue";
 import addForm from "./form.vue";
+import { provide, ref } from "vue";
 export default {
   components:{
     [Row.name]: Row,
@@ -30,8 +31,22 @@ export default {
   },
   methods:{
     add(){
-      this.showAdd = true;
+      this.formVisibel = true;
     },
+    onUpdate(param={}){
+      this.$refs.addForm.update(param);
+      this.formVisibel = true;
+    },
+    refresh(){
+      this.$refs.display.fetch();
+    }
   },
+  setup(){
+    const formVisibel = ref(false);
+    provide("formVisibel", formVisibel)
+    return {
+      formVisibel
+    }
+  }
 }
 </script>

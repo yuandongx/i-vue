@@ -2,7 +2,8 @@ const setting = {
     namespaced: true,
     state: ()=>{
         return {
-                    data: [],
+                    data: [], // crendentials
+                    selectedCrend: null, // crendentials
                 }
     },
     getters: {
@@ -17,9 +18,12 @@ const setting = {
         }
     },
     mutations: {
-        saveCredent(state, data){
+        saveCredent(state, data) {
             state.data = data;
         },
+        selectedCrendentials(state, data) {
+            state.selectedCrend = data;
+        }
     }
 
 }

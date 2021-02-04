@@ -10,8 +10,9 @@
     </a-table>
 </template>
 <script>
-import {Table, Divider, Button} from "ant-design-vue";
-import { provide, reactive} from "vue";
+import {Table, Divider, Button, message, Modal} from "ant-design-vue";
+import { ExclamationCircleOutlined } from "@ant-design/icons-vue";
+import { provide, reactive, createVNode} from "vue";
 import { createNamespacedHelpers } from "vuex";
 const { mapMutations } =  createNamespacedHelpers("setting");
 const columns = [
@@ -68,19 +69,38 @@ export default {
             this.loading = true;
             this.http.get("/api/setting/credentials").then(({data})=>{
                 this.data = data;
-                //this.$store.setting.commit("saveCredent", data);
                 this.saveCredent(data);
             }).finally(()=>{
                 this.loading = false;
             });
         },
         handleModify(recoder){
-            console.log(recoder);
+            this.$emit("update", recoder);
+        },
+        delOnOK: function(recoder){
+            this.http.delete("/api/setting/credentials", recoder).then(({data})=>{
+                message.success(data);
+            });
+        },
+        delOnCancel: function(){
+             Modal.destroyAll();
         },
         handleDelete(recoder){
-            console.log(recoder);
+            const msg = "是否确认删除 【" +  recoder.name +"】 ?"
+            Modal.confirm({
+                title: "确认删除",
+                content: msg,
+                okText: "确定",
+                cancelText: "取消",
+                icon: createVNode(ExclamationCircleOutlined),
+                onOk: () => this.delOnOK(recoder),
+                onCancel: this.delOnCancel,
+            });
         },
-        ...mapMutations(["saveCredent", "saveCredent"]),
+        ...mapMutations({
+            saveCredent: "saveCredent",
+            seleted: "selectedCrendentials",
+        }),
     }, 
     setup(){
         const become_methods = reactive(["sudo"]);
