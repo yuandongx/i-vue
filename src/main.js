@@ -7,6 +7,7 @@ import { Layout,
          Menu, } from "ant-design-vue";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import store from "./store";
 
 NProgress.configure({
   easing: "ease",
@@ -31,6 +32,7 @@ const app = createApp(App)
             .use(router)
             .use(Layout)
             .use(Menu)
+            .use(store);
 axios.defaults.withCredentials = false;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.delete['Content-Type'] = 'application/json';

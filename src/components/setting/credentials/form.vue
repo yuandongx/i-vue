@@ -29,7 +29,7 @@
                         </a-modal>
                     </div>
                 </template>
-                <a-select-option v-for="b in becomeMethods" :key="b" >{{b}}</a-select-option>
+                <a-select-option v-for="b in become_methods" :key="b" >{{b}}</a-select-option>
                 </a-select>
             </a-form-item>
             <a-form-item label="特权用户" name="become_user"><a-input v-model:value="form.become_user"/></a-form-item>
@@ -40,9 +40,11 @@
 </template>
 <script>
 import { Form, Modal, Input, Select, Divider} from "ant-design-vue";
-import { PlusOutlined } from "@ant-design/icons-vue"
+import { PlusOutlined } from "@ant-design/icons-vue";
+import { createNamespacedHelpers } from "vuex";
+const { mapGetters } = createNamespacedHelpers("setting");
 export default {
-    props: ["showForm", "becomeMethods"],
+    props: ["showForm"],
     components:{
         [Input.name]: Input,
         [Modal.name]: Modal,
@@ -101,6 +103,10 @@ export default {
         addItem: function(){},
         handleNewOk: function(){},
         handleNewCancle: function(){},
+    },
+    computed:{
+        // becomeMethods: () => this.$store.setting.getter.become_methods,
+        ...mapGetters(["become_methods"]),
     }
 }
 </script>

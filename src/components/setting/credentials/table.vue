@@ -12,6 +12,8 @@
 <script>
 import {Table, Divider, Button} from "ant-design-vue";
 import { provide, reactive} from "vue";
+import { createNamespacedHelpers } from "vuex";
+const { mapMutations } =  createNamespacedHelpers("setting");
 const columns = [
     {
         title: "标识",
@@ -66,11 +68,8 @@ export default {
             this.loading = true;
             this.http.get("/api/setting/credentials").then(({data})=>{
                 this.data = data;
-                data.forEach(element => {
-                    if (element.become_method !== undefined && !this.become_methods.includes(element.become_method)){
-                        this.become_methods.push(element.become_method);
-                    }
-                });
+                //this.$store.setting.commit("saveCredent", data);
+                this.saveCredent(data);
             }).finally(()=>{
                 this.loading = false;
             });
@@ -81,6 +80,7 @@ export default {
         handleDelete(recoder){
             console.log(recoder);
         },
+        ...mapMutations(["saveCredent", "saveCredent"]),
     }, 
     setup(){
         const become_methods = reactive(["sudo"]);
