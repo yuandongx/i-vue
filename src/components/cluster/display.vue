@@ -59,7 +59,7 @@
       <DeleteTwoTone @click="deleteHosts(record)"/>
       </Tooltip>
       <divide type="vertical"/>
-      <Tooltip title="终端交互">
+      <Tooltip title="终端交互" @click="openConsole(record)">
       <InteractionTwoTone/>
       </Tooltip>
     </template>
@@ -255,6 +255,10 @@ export default {
     },
     modify: function(param){
       this.$emit("update", param);
+    },
+    openConsole: function(record){
+      // let { href } = this.$router.resolve({path: "ssh", query: {id: record.id}});
+      window.open(`/ssh/${record.id}`, "_blank");
     },
     deleteHosts: function(host={}){
       if (host.length == {} && this.selectIds.length == 0){

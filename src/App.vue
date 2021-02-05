@@ -1,6 +1,9 @@
 <template>
-  <Window />
+  <!-- <Window /> -->
+  <router-view name="windows"></router-view>
+  <router-view name="ssh"></router-view>
 </template>
+<!--
 <script>
 import Window from "./window/index.vue";
 export default {
@@ -9,6 +12,7 @@ export default {
   }
 };
 </script>
+-->
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
