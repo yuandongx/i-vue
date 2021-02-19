@@ -65,6 +65,7 @@ const windows = Items.map(item1 => {
 const routes = [{
   name: "ssh",
   path: "/ssh/:id",
+  props: true,
   components: {ssh: () => import("../components/ssh/index.vue")}
 },
 {

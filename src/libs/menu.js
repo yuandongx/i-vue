@@ -25,6 +25,23 @@ const menus = [
     path: "/schedule",
     title: "任务管理",
     icon: ScheduleOutlined,
+    children: [
+        {
+            name: "cli",
+            path: "/schedule/cli",
+            title: "批量下发",
+        },
+        {
+            name: "tasks",
+            path: "/schedule/tasks",
+            title: "任务调度",
+        },
+        {
+            name: "workflow",
+            path: "/schedule/workflow",
+            title: "工作流",
+        },
+    ],
 },
 {
     name: "deployment",
