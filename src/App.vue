@@ -1,5 +1,6 @@
 <template>
   <!-- <Window />  直接用路由来导航-->
+  <router-view name="login"></router-view>
   <router-view name="windows"></router-view>
   <router-view name="ssh"></router-view>
 </template>

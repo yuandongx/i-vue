@@ -69,6 +69,11 @@ const routes = [{
   components: {ssh: () => import("../components/ssh/index.vue")}
 },
 {
+  name: "login",
+  path: "/login",
+  components: {login: () => import("../login/index.vue")},
+},
+{
   name: "windows",
   path: "/",
   components: {windows: () => import("../window/index.vue")},
