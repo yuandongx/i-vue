@@ -8,7 +8,7 @@
 				</div>
 				<div class="form-section">
 					<h3>账户登录</h3>
-					<form action="#" method="post" class="signin-form">
+					<!-- <form action="#" method="post" class="signin-form">
 						<div class="form-input">
 							<input type="text" name="Username" placeholder="Username" required="" autofocus>
 						</div>
@@ -24,7 +24,29 @@
 						<div class="new-signup">
 							<a href="#reload" class="signuplink">忘记用户或密码？</a>
 						</div>
-					</form>
+					</form> -->
+          <a-form :wrapperCol="wrapperCol">
+              <a-form-item>
+                  <a-input v-model:value="loginForm.user" placeholder="Username">
+                      <template #prefix><UserOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
+                  </a-input>
+              </a-form-item>
+              <a-form-item>
+                  <a-input v-model:value="loginForm.password" type="password" placeholder="Password">
+                      <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
+                  </a-input>
+              </a-form-item>
+              <a-form-item>
+              <a-button
+                  type="primary"
+                  shape="round"
+                  @click="onLogin"
+                  :disabled="loginForm.user === '' || loginForm.password === ''"
+              >
+                  登录
+              </a-button>
+              </a-form-item>
+          </a-form>
 				</div>
 			</div>
 		</div>
@@ -34,10 +56,16 @@
 	</section>
 </template>
 <script>
-
+import { Form, Input, Button, message } from "ant-design-vue";
+import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 export default {
     components: {
-
+        UserOutlined,
+        LockOutlined,
+        [Form.name]: Form,
+        [Form.Item.name]: Form.Item,
+        [Input.name]: Input,
+        [Button.name]: Button,
     },
     data(){
         return {
@@ -45,6 +73,18 @@ export default {
                 user: "",
                 password: ""
             },
+            wrapperCol: { span: 18, offset: 3 },
+        }
+    },
+    methods: {
+       onLogin: function(){
+        this.http.post("/api/login", this.loginForm).then(({data})=>{
+            if (data == "success") {
+                this.$emit("next");
+            } else {
+                message.warning("用户名或密码错误，登录失败！");
+            }
+        });
         }
     }
 }
@@ -167,7 +207,7 @@ export default {
       padding: 2rem 3rem;
       border-radius: 4px;
       box-shadow: 0px 9px 24px 5px rgba(0, 0, 0, 0.04);
-      background: #fff;
+      background: rgba(59, 56, 56, 0.5);
   }
 
   .w3l-login .form-section h3 {

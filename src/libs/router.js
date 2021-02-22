@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Items from "./menu";
+import { hasAuthen } from "./cookies";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 // 如果是Menu 发生变化，新增路由应该在中Menu中添加
 // const routes = Items.map(item => ({
 //   path: item.path,
@@ -72,6 +75,7 @@ const routes = [{
   name: "login",
   path: "/login",
   components: {login: () => import("../login/index.vue")},
+  props: {login: route => ({next: route.query.next})} // 命名视图要有自己的props配置（login对应的配置）
 },
 {
   name: "windows",
@@ -84,4 +88,30 @@ const router = createRouter({
   routes
 });
 
+NProgress.configure({
+  easing: "ease",
+  speed: 500,
+  showSpinner: false,
+  trickleSpeed: 200,
+  minimum: 0.3
+});
+
+//当路由进入前
+router.beforeEach((to, from, next) => {
+  // 每次切换页面时，调用进度条
+  // console.log(to.fullPath);
+  // console.log(to.query);
+  NProgress.start();
+  NProgress.inc();
+  if (!hasAuthen() && !to.fullPath.startsWith("/login")){
+    console.log(to.fullPath);
+    next({path: "/login", query: {next: to.fullPath}});
+  } else {
+    next();
+  }
+});
+//当路由进入后：关闭进度条
+router.afterEach(() => {
+  NProgress.done();
+});
 export default router;

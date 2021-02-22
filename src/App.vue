@@ -4,16 +4,20 @@
   <router-view name="windows"></router-view>
   <router-view name="ssh"></router-view>
 </template>
-<!-- 这个也没有必要了， 先注释掉，后续用不上了可删除了
+// <!-- 这个也没有必要了， 先注释掉，后续用不上了可删除了-->
 <script>
-import Window from "./window/index.vue";
+
 export default {
-  components: {
-    Window
+  props: {
+    
+        next: {
+            type: String,
+            default: "111111111111",
+        }
   }
 };
 </script>
--->
+
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
