@@ -8,45 +8,35 @@
 				</div>
 				<div class="form-section">
 					<h3>账户登录</h3>
-					<!-- <form action="#" method="post" class="signin-form">
-						<div class="form-input">
-							<input type="text" name="Username" placeholder="Username" required="" autofocus>
-						</div>
-						<div class="form-input">
-							<input type="password" name="password" placeholder="Password" required="">
-						</div>
-						<label class="check-remaind">
-							<input type="checkbox">
-							<span class="checkmark"></span>
-							<p class="remember">记住我</p>
-						</label>
-						<button type="submit" class="btn btn-primary theme-button mt-4">登录</button>
-						<div class="new-signup">
-							<a href="#reload" class="signuplink">忘记用户或密码？</a>
-						</div>
-					</form> -->
-          <a-form :wrapperCol="wrapperCol">
-              <a-form-item>
-                  <a-input v-model:value="loginForm.user" placeholder="Username">
-                      <template #prefix><UserOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
-                  </a-input>
-              </a-form-item>
-              <a-form-item>
-                  <a-input v-model:value="loginForm.password" type="password" placeholder="Password">
-                      <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
-                  </a-input>
-              </a-form-item>
-              <a-form-item>
-              <a-button
-                  type="primary"
-                  shape="round"
-                  @click="onLogin"
-                  :disabled="loginForm.user === '' || loginForm.password === ''"
-              >
-                  登录
-              </a-button>
-              </a-form-item>
-          </a-form>
+                        <a-form :wrapperCol="wrapperCol">
+                            <a-form-item>
+                                <a-input
+                                    v-model:value="loginForm.user"
+                                    @pressEnter="onEnter"
+                                    placeholder="Username">
+                                    <template #prefix><UserOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
+                                </a-input>
+                            </a-form-item>
+                            <a-form-item>
+                                <a-input-password
+                                    v-model:value="loginForm.password"
+                                    type="password"
+                                    @pressEnter="onEnter"
+                                    placeholder="Password">
+                                    <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
+                                </a-input-password>
+                            </a-form-item>
+                            <a-form-item>
+                            <a-button
+                                type="primary"
+                                shape="round"
+                                @click="onLogin"
+                                :disabled="loginForm.user === '' || loginForm.password === ''"
+                            >
+                                登录
+                            </a-button>
+                            </a-form-item>
+                        </a-form>
 				</div>
 			</div>
 		</div>
@@ -62,6 +52,7 @@ export default {
     components: {
         UserOutlined,
         LockOutlined,
+        [Input.Password.name]: Input.Password,
         [Form.name]: Form,
         [Form.Item.name]: Form.Item,
         [Input.name]: Input,
@@ -85,7 +76,12 @@ export default {
                 message.warning("用户名或密码错误，登录失败！");
             }
         });
-        }
+        },
+        onEnter: function(){
+            if (this.loginForm.user !== '' && this.loginForm.password !== ''){
+                this.onLogin();
+            }
+        },
     }
 }
 </script>
