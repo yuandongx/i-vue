@@ -4,26 +4,17 @@
     style="min-height: 100vh"
   >
     <a-layout-sider
-      v-model:collapsed="collapsed"
+      v-model:collapsed="menu_collapsed"
       :trigger="null"
       collapsible
       style="{ overflow: 'auto', height: '2000vh', position: 'fixed', left: 0}"
     >
       <div class="logo" />
-      <Left />
+      <the-left />
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
-        <menu-unfold-outlined
-          v-if="collapsed"
-          class="trigger"
-          @click="() => (collapsed = !collapsed)"
-        />
-        <menu-fold-outlined
-          v-else
-          class="trigger"
-          @click="() => (collapsed = !collapsed)"
-        />
+        <the-header />
       </a-layout-header>
       <a-layout-content
         :style="{
@@ -39,26 +30,23 @@
   </a-layout>
 </template>
 <script>
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
+
 import Left from "./Left.vue";
-import { provide, ref } from 'vue';
+import Header from "./Top";
+import { createNamespacedHelpers } from "vuex";
+const { mapState } = createNamespacedHelpers("menu");
 export default {
   components: {
-    Left,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-  },
-  setup(){
-    const collapsed = ref(true);
-    provide("collapsed", collapsed);
-    return {
-      collapsed
-    }
+    "the-left": Left,
+    "the-header": Header,
   },
   data() {
     return {
       selectedKeys: ["1"],
     };
+  },
+  computed: {
+    ...mapState({menu_collapsed: "collapsed"}),
   }
 };
 </script>

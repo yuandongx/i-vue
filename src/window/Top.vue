@@ -1,0 +1,42 @@
+<template>
+    <a-row>
+      <a-col :span="2">
+          <menu-unfold-outlined
+          v-if="collapsed"
+          class="trigger"
+          @click="switch_collapsed"
+        />
+        <menu-fold-outlined
+          v-else
+          class="trigger"
+          @click="switch_collapsed"
+        />
+      </a-col>
+    </a-row>
+</template>
+<script>
+import { Row, Col } from "ant-design-vue";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons-vue";
+import { createNamespacedHelpers } from "vuex";
+const { mapMutations } =  createNamespacedHelpers("menu");
+export default {
+    components: {
+        [Row.name]: Row,
+        [Col.name]: Col,
+        MenuUnfoldOutlined,
+        MenuFoldOutlined,
+    },
+    data(){
+        return {
+            collapsed: true,
+        }
+    },
+    methods: {
+        switch_collapsed: function() {
+            this.collapsed = !this.collapsed;
+            this.onCollapsed(this.collapsed);
+        },
+        ...mapMutations({onCollapsed: "onCollapsed"}),
+    }
+}
+</script>

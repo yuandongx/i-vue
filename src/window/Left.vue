@@ -8,9 +8,10 @@
   </a-menu>
 </template>
 <script>
-import { inject } from 'vue';
 import items from "../libs/menu"
 import Item from "./basic/MenuItem.vue";
+import { createNamespacedHelpers } from "vuex";
+const { mapState } = createNamespacedHelpers("menu");
 export default {
   data: function(){
     return {
@@ -20,11 +21,8 @@ export default {
   components: {
     Item,
   },
-  setup(){
-    const menu_collapsed = inject("collapsed", true);
-    return {
-      menu_collapsed
-    }
+  computed: {
+    ...mapState({menu_collapsed: "collapsed"}),
   }
 };
 </script>
