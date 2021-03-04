@@ -11,7 +11,6 @@ export default {
         }
     },
     mounted(){
-        console.log("222", this.next);
     },
     components: {
         "login-form": loginForm,

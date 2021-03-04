@@ -13,6 +13,7 @@
                                 <a-input
                                     v-model:value="loginForm.user"
                                     @pressEnter="onEnter"
+                                    autocomplete
                                     placeholder="Username">
                                     <template #prefix><UserOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
                                 </a-input>
@@ -22,6 +23,7 @@
                                     v-model:value="loginForm.password"
                                     type="password"
                                     @pressEnter="onEnter"
+                                    autocomplete
                                     placeholder="Password">
                                     <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
                                 </a-input-password>

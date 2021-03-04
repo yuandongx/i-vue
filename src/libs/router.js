@@ -104,7 +104,6 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   NProgress.inc();
   if (!hasAuthen() && !to.fullPath.startsWith("/login")){
-    console.log(to.fullPath);
     next({path: "/login", query: {next: to.fullPath}});
   } else {
     next();
