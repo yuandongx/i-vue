@@ -6,7 +6,7 @@ import router from "./libs/router";
 import store from "./store";
 
 
-const app = createApp(App)
+const app = createApp(App).use(router)
             .use(router)
             .use(store);
 app.config.globalProperties.http =  axios;

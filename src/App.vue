@@ -1,28 +1,17 @@
 <template>
-  <!-- <Window />  直接用路由来导航-->
-  <div>
-    <router-view name="login" />
-    <router-view name="windows" />
-    <router-view name="ssh" />
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
   </div>
+  <router-view/>
 </template>
-<script>
-
-export default {
-  props: {
-        next: {
-            type: String,
-            default: "111111111111",
-        }
-  }
-};
-</script>
 
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
   color: #2c3e50;
 }
 
