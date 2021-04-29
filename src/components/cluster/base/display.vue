@@ -265,7 +265,7 @@ export default {
     delOnOK: function(ids){
       const data = ids.map(id => ({id}));
       // 此处需要转JSON，不然不会携带 Content-Type
-      this.http.delete("/api/cluster", { headers: { "Content-Type": "application/json" }, data: JSON.stringify(data) }).then(({ data }) => {
+      this.http.delete(`/v1/cluster/${this.platform}/delete`, { headers: { "Content-Type": "application/json" }, data: JSON.stringify(data) }).then(({ data }) => {
         message.success(data);
       }).catch(()=>{
         message.error("删除失败。");
@@ -310,7 +310,7 @@ export default {
     },
     fetch(params={}){
       this.loading = true;
-      this.http.get("/api/cluster", params).then(({data})=>{
+      this.http.get(`/v1/cluster/${this.platform}/`, params).then(({data})=>{
         this.data = data;
         console.log(data);
       // let names = [];

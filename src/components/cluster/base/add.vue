@@ -105,8 +105,8 @@ export default {
   props: {
     platform: {
       type: String,
-      default: () => "linux"
-    }
+      default: () => "linux",
+    },
   },
   components: {
     [Divider.name]: Divider,

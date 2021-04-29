@@ -34,8 +34,19 @@ const menus = [
             name: "cluster-router",
             title: "路由器",
             path: "/cluster/router",
+        },
+        {
+            name: "cluster-switch",
+            title: "交换机",
+            path: "/cluster/switch",
         }
     ]
+},
+{
+    name: "workflow",
+    path: "/workflow",
+    title: "任务剧本",
+    icon: DeploymentUnitOutlined,
 },
 {
     name: "schedule",
@@ -53,12 +64,7 @@ const menus = [
             path: "/schedule/tasks",
             title: "任务调度",
             id: "3-2",
-        },
-        {
-            name: "workflow",
-            path: "/schedule/workflow",
-            title: "工作流",
-        },
+        }
     ],
 },
 {

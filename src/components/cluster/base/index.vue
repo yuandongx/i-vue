@@ -11,6 +11,7 @@
         <add-new-host
           @redisplay="redisplay"
           ref="update_host"
+          :platform="platform"
         />
       </a-col>
       <a-col :span="2">
@@ -34,8 +35,9 @@
     <display
       ref="refresh"
       @update="update"
+      :platform="platform"
     />
-    <import-modal @redisplay="redisplay" />
+    <import-modal @redisplay="redisplay" :platform="platform"/>
   </div>
 </template>
 <script>
