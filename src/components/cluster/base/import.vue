@@ -37,6 +37,12 @@ import { Modal, Button, Upload, Tag, message } from "ant-design-vue";
 import { inject } from "vue";
 
 export default {
+  props: {
+    platform: {
+      type: String,
+      default: () => "linux"
+    }
+  },
     setup(){
         let importVisible = inject("importVisible", false);
         return {importVisible};

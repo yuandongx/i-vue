@@ -102,6 +102,12 @@ const validatIp = (_, value) => {
   return Promise.resolve();
 };
 export default {
+  props: {
+    platform: {
+      type: String,
+      default: () => "linux"
+    }
+  },
   components: {
     [Divider.name]: Divider,
     [Modal.name]: Modal,

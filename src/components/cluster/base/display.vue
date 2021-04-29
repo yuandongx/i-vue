@@ -92,6 +92,12 @@ const data = [];
 const colors = ["green", "default", "red", "warning"];
 const tagmsgs = ["验证成功", "未验证", "主机不可达", "认证失败"];
 export default {
+  props: {
+    platform: {
+      type: String,
+      default: () => "linux"
+    }
+  },
   components: {
     [Tag.name]: Tag,
     [Button.name]: Button,

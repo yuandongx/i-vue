@@ -19,6 +19,20 @@ const menus = [
     path: "/cluster",
     title: "资产管理",
     icon: ClusterOutlined,
+    children: [
+        {
+            name: "linux",
+            path: "/cluster/linux",
+        },
+        {
+            name: "firewall",
+            path: "/cluster/firewall",
+        },
+        {
+            name: "router",
+            path: "/cluster/router",
+        }
+    ]
 },
 {
     name: "schedule",
