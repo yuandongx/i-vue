@@ -1,24 +1,27 @@
 <template>
-    <a-button
-      type="dashed"
-      @click="onSelectHosts">
-        <PlusOutlined />
-        选择目标主机
-    </a-button>
-    <a-tag
-      v-for="host in selected"
-      :key="host.id"
-      @close="onCloseTag(host)"
-      :closable="true">
-      {{ host.hostname }}（{{ host.hostip }}）
-    </a-tag>
-    <a-modal
-      :visible="showSelectModal"
-      title="请选择目标主机"
-      @ok="onOk"
-      @cancel="onCancel">
-        <b-display ref="display"/>
-    </a-modal>
+  <a-button
+    type="dashed"
+    @click="onSelectHosts"
+  >
+    <PlusOutlined />
+    选择目标主机
+  </a-button>
+  <a-tag
+    v-for="host in selected"
+    :key="host.id"
+    @close="onCloseTag(host)"
+    :closable="true"
+  >
+    {{ host.hostname }}（{{ host.hostip }}）
+  </a-tag>
+  <a-modal
+    :visible="showSelectModal"
+    title="请选择目标主机"
+    @ok="onOk"
+    @cancel="onCancel"
+  >
+    <b-display ref="display" />
+  </a-modal>
 </template>
 <script>
 import display from "./hosts.vue";

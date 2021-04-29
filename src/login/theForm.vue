@@ -1,51 +1,60 @@
 <template>
-   <!-- login form -->
-	<section class="w3l-login">
-		<div class="overlay">
-			<div class="wrapper">
-				<div class="logo">
-					<a class="brand-logo" href="index.html">Snow login form</a>
-				</div>
-				<div class="form-section">
-					<h3>账户登录</h3>
-                        <a-form :wrapperCol="wrapperCol">
-                            <a-form-item>
-                                <a-input
-                                    v-model:value="loginForm.user"
-                                    @pressEnter="onEnter"
-                                    autocomplete
-                                    placeholder="Username">
-                                    <template #prefix><UserOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
-                                </a-input>
-                            </a-form-item>
-                            <a-form-item>
-                                <a-input-password
-                                    v-model:value="loginForm.password"
-                                    type="password"
-                                    @pressEnter="onEnter"
-                                    autocomplete
-                                    placeholder="Password">
-                                    <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
-                                </a-input-password>
-                            </a-form-item>
-                            <a-form-item>
-                            <a-button
-                                type="primary"
-                                shape="round"
-                                @click="onLogin"
-                                :disabled="loginForm.user === '' || loginForm.password === ''"
-                            >
-                                登录
-                            </a-button>
-                            </a-form-item>
-                        </a-form>
-				</div>
-			</div>
-		</div>
-		<div id='stars'></div>
-		<div id='stars2'></div>
-		<div id='stars3'></div>
-	</section>
+  <!-- login form -->
+  <section class="w3l-login">
+    <div class="overlay">
+      <div class="wrapper">
+        <div class="logo">
+          <a
+            class="brand-logo"
+            href="index.html"
+          >Snow login form</a>
+        </div>
+        <div class="form-section">
+          <h3>账户登录</h3>
+          <a-form :wrapper-col="wrapperCol">
+            <a-form-item>
+              <a-input
+                v-model:value="loginForm.user"
+                @pressEnter="onEnter"
+                autocomplete
+                placeholder="Username"
+              >
+                <template #prefix>
+                  <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
+                </template>
+              </a-input>
+            </a-form-item>
+            <a-form-item>
+              <a-input-password
+                v-model:value="loginForm.password"
+                type="password"
+                @pressEnter="onEnter"
+                autocomplete
+                placeholder="Password"
+              >
+                <template #prefix>
+                  <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
+                </template>
+              </a-input-password>
+            </a-form-item>
+            <a-form-item>
+              <a-button
+                type="primary"
+                shape="round"
+                @click="onLogin"
+                :disabled="loginForm.user === '' || loginForm.password === ''"
+              >
+                登录
+              </a-button>
+            </a-form-item>
+          </a-form>
+        </div>
+      </div>
+    </div>
+    <div id="stars" />
+    <div id="stars2" />
+    <div id="stars3" />
+  </section>
 </template>
 <script>
 import { Form, Input, Button, message } from "ant-design-vue";

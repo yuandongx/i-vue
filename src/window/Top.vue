@@ -1,24 +1,24 @@
 <template>
-    <a-row>
+  <a-row>
     <a-col :span="2">
-          <menu-unfold-outlined
-          v-if="collapsed"
-          class="trigger"
-          @click="switch_collapsed"
-        />
-        <menu-fold-outlined
-          v-else
-          class="trigger"
-          @click="switch_collapsed"
-        />
+      <menu-unfold-outlined
+        v-if="collapsed"
+        class="trigger"
+        @click="switch_collapsed"
+      />
+      <menu-fold-outlined
+        v-else
+        class="trigger"
+        @click="switch_collapsed"
+      />
     </a-col>
     <a-col :span="20">
-        <!-- <h1>欢迎登录</h1> -->
+      <!-- <h1>欢迎登录</h1> -->
     </a-col>
     <a-col :span="2">
-        <the-login-center></the-login-center>
+      <the-login-center />
     </a-col>
-    </a-row>
+  </a-row>
 </template>
 <script>
 import { Row, Col } from "ant-design-vue";

@@ -1,21 +1,42 @@
 <template>
-    <div>
-      <a-row>
-        <a-col :span="2">
-          <a-button type="link" @click="()=>(addHostVisiable=true)">新建主机</a-button>
-          <add-new-host @redisplay="redisplay" ref="update_host"/>
-        </a-col>
-        <a-col :span="2">
-          <a-button type="link" @click="showImportModal">批量导入主机</a-button>
-        </a-col>
-        <a-col :span="2">
-          <a-button type="link" @click="deleteHost">批量删除主机</a-button>
-        </a-col>
-      </a-row>
-      <a-divider></a-divider>
-      <display ref="refresh" @update="update"/>
-      <import-modal  @redisplay="redisplay"/>
-    </div>
+  <div>
+    <a-row>
+      <a-col :span="2">
+        <a-button
+          type="link"
+          @click="()=>(addHostVisiable=true)"
+        >
+          新建主机
+        </a-button>
+        <add-new-host
+          @redisplay="redisplay"
+          ref="update_host"
+        />
+      </a-col>
+      <a-col :span="2">
+        <a-button
+          type="link"
+          @click="showImportModal"
+        >
+          批量导入主机
+        </a-button>
+      </a-col>
+      <a-col :span="2">
+        <a-button
+          type="link"
+          @click="deleteHost"
+        >
+          批量删除主机
+        </a-button>
+      </a-col>
+    </a-row>
+    <a-divider />
+    <display
+      ref="refresh"
+      @update="update"
+    />
+    <import-modal @redisplay="redisplay" />
+  </div>
 </template>
 <script>
 import { Button, Col, Divider, Row } from "ant-design-vue";

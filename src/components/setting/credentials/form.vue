@@ -1,41 +1,100 @@
 <template>
-    <a-modal destroyOnClose :visible="formVisibel" title="添加访问凭证" okText="确定" cancelText="取消" @ok="onOk" @cancel="onCancel">
-        <a-form :model="form" ref="aform" :label-col="labelCol" :wrapper-col="wrapperCol" labelAlign="right" :rules="rules">
-            <a-form-item label="标识" name="name"><a-input v-model:value="form.name"/></a-form-item>
-            <a-form-item label="用户名" name="username"><a-input v-model:value="form.username"/></a-form-item>
-            <a-form-item label="密码" name="password"><a-input-password v-model:value="form.password"/></a-form-item>
-            <a-form-item label="特权方法" name="become_method">
-                <a-select
-                placeholder="可选"
-                v-model:value="form.become_method"
-                show-search>
-                <template #dropdownRender="{ menuNode: menu }">
-                    <v-nodes :vnodes="menu" />
-                    <a-divider style="margin: 4px 0;" />
-                    <div
-                        style="padding: 4px 8px; cursor: pointer;"
-                        @mousedown="e => e.preventDefault()"
-                        @click="addItem">
-                        <plus-outlined /> 新的特权方法
-                        <a-modal 
-                            v-model:visible="showNewMethodModal"
-                            @ok="handleNewOk"
-                            okText="确定"
-                            cancelText="取消"
-                            @cancel="handleNewCancle"
-                            title="输入新的特权方法">
-                            <a-input v-model:value="new_become_method" placeholder="输入新的特权方法"></a-input>
-                        </a-modal>
-                    </div>
-                </template>
-                <a-select-option v-for="b in become_methods" :key="b" >{{b}}</a-select-option>
-                </a-select>
-            </a-form-item>
-            <a-form-item label="特权用户" name="become_user"><a-input v-model:value="form.become_user"/></a-form-item>
-            <a-form-item label="特权密码" name="become_password"><a-input-password v-model:value="form.become_password"/></a-form-item>
-            <a-form-item label="备注" name="description"><a-input-text v-model:value="form.description"/></a-form-item>
-        </a-form>
-    </a-modal>
+  <a-modal
+    destroy-on-close
+    :visible="formVisibel"
+    title="添加访问凭证"
+    ok-text="确定"
+    cancel-text="取消"
+    @ok="onOk"
+    @cancel="onCancel"
+  >
+    <a-form
+      :model="form"
+      ref="aform"
+      :label-col="labelCol"
+      :wrapper-col="wrapperCol"
+      label-align="right"
+      :rules="rules"
+    >
+      <a-form-item
+        label="标识"
+        name="name"
+      >
+        <a-input v-model:value="form.name" />
+      </a-form-item>
+      <a-form-item
+        label="用户名"
+        name="username"
+      >
+        <a-input v-model:value="form.username" />
+      </a-form-item>
+      <a-form-item
+        label="密码"
+        name="password"
+      >
+        <a-input-password v-model:value="form.password" />
+      </a-form-item>
+      <a-form-item
+        label="特权方法"
+        name="become_method"
+      >
+        <a-select
+          placeholder="可选"
+          v-model:value="form.become_method"
+          show-search
+        >
+          <template #dropdownRender="{ menuNode: menu }">
+            <v-nodes :vnodes="menu" />
+            <a-divider style="margin: 4px 0;" />
+            <div
+              style="padding: 4px 8px; cursor: pointer;"
+              @mousedown="e => e.preventDefault()"
+              @click="addItem"
+            >
+              <plus-outlined /> 新的特权方法
+              <a-modal 
+                v-model:visible="showNewMethodModal"
+                @ok="handleNewOk"
+                ok-text="确定"
+                cancel-text="取消"
+                @cancel="handleNewCancle"
+                title="输入新的特权方法"
+              >
+                <a-input
+                  v-model:value="new_become_method"
+                  placeholder="输入新的特权方法"
+                />
+              </a-modal>
+            </div>
+          </template>
+          <a-select-option
+            v-for="b in become_methods"
+            :key="b"
+          >
+            {{ b }}
+          </a-select-option>
+        </a-select>
+      </a-form-item>
+      <a-form-item
+        label="特权用户"
+        name="become_user"
+      >
+        <a-input v-model:value="form.become_user" />
+      </a-form-item>
+      <a-form-item
+        label="特权密码"
+        name="become_password"
+      >
+        <a-input-password v-model:value="form.become_password" />
+      </a-form-item>
+      <a-form-item
+        label="备注"
+        name="description"
+      >
+        <a-input-text v-model:value="form.description" />
+      </a-form-item>
+    </a-form>
+  </a-modal>
 </template>
 <script>
 import { Form, Modal, Input, Select, Divider, message} from "ant-design-vue";

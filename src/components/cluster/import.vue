@@ -1,31 +1,35 @@
 <template>
-    <a-modal
-     :visible="importVisible"
-     okText="确定"
-     cancelText="取消"
-     @ok="onOk"
-     @cancel="onCancel"
-     title="批量导入">
+  <a-modal
+    :visible="importVisible"
+    ok-text="确定"
+    cancel-text="取消"
+    @ok="onOk"
+    @cancel="onCancel"
+    title="批量导入"
+  >
     <a-tag :color="levelColor">
       <template #icon>
-         <CheckCircleOutlined v-if="levelColor == 'success'"/>
-         <ClockCircleOutlined v-else-if="levelColor == 'error'"/>
-         <ExclamationCircleFilled v-else/>
+        <CheckCircleOutlined v-if="levelColor == 'success'" />
+        <ClockCircleOutlined v-else-if="levelColor == 'error'" />
+        <ExclamationCircleFilled v-else />
       </template>
       {{ msg }}
     </a-tag>
     <br>
     <div>
-        <a href="/resource/template.xlsx">下载模板</a>
-         <a-upload
-            :customRequest="upload"
-            @change="handleChange"
-            :multiple="false"
-            v-model:fileList="fileList">
-            <a-button type="link">上传文件</a-button>
-         </a-upload>
+      <a href="/resource/template.xlsx">下载模板</a>
+      <a-upload
+        :custom-request="upload"
+        @change="handleChange"
+        :multiple="false"
+        v-model:fileList="fileList"
+      >
+        <a-button type="link">
+          上传文件
+        </a-button>
+      </a-upload>
     </div>
-    </a-modal>
+  </a-modal>
 </template>
 <script>
 import { ExclamationCircleFilled, CheckCircleOutlined, ClockCircleOutlined } from "@ant-design/icons-vue";

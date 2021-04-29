@@ -1,13 +1,24 @@
 <template>
-    <a-table :columns="columns" :loading="loading" :dataSource="data" :rowKey="recoder => recoder.id">
-        <template #operation="{record}">
-            <span>
-                <a href="#" @click="handleModify(record)">修改</a>
-                <a-divider type="vertical"></a-divider>
-                <a href="#" @click="handleDelete(record)">删除</a>
-            </span>
-        </template>
-    </a-table>
+  <a-table
+    :columns="columns"
+    :loading="loading"
+    :data-source="data"
+    :row-key="recoder => recoder.id"
+  >
+    <template #operation="{record}">
+      <span>
+        <a
+          href="#"
+          @click="handleModify(record)"
+        >修改</a>
+        <a-divider type="vertical" />
+        <a
+          href="#"
+          @click="handleDelete(record)"
+        >删除</a>
+      </span>
+    </template>
+  </a-table>
 </template>
 <script>
 import {Table, Divider, Button, message, Modal} from "ant-design-vue";

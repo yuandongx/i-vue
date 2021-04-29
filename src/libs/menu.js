@@ -35,6 +35,7 @@ const menus = [
             name: "tasks",
             path: "/schedule/tasks",
             title: "任务调度",
+            id: "3-2",
         },
         {
             name: "workflow",

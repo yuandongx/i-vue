@@ -1,3 +1,3 @@
 <template>
-    <div>workflow</div>
+  <div>workflow</div>
 </template>

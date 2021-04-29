@@ -1,5 +1,5 @@
 <template>
-    <div id="terminal"></div>
+  <div id="terminal" />
 </template>
 <script>
 import { Terminal } from 'xterm';

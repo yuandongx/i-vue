@@ -1,5 +1,11 @@
 <template>
-  <a-table :rowSelection="rowSelections" :data-source="data" :columns="columns" :rowKey="recoder => recoder.id" :loading="loading">
+  <a-table
+    :row-selection="rowSelections"
+    :data-source="data"
+    :columns="columns"
+    :row-key="recoder => recoder.id"
+    :loading="loading"
+  >
     <template #filterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }">
       <div style="padding: 8px">
         <a-input
@@ -16,10 +22,16 @@
           style="width: 90px; margin-right: 8px"
           @click="handleSearch(selectedKeys, confirm, column.dataIndex)"
         >
-          <template #icon><SearchOutlined /></template>
+          <template #icon>
+            <SearchOutlined />
+          </template>
           查找
         </a-button>
-        <a-button size="small" style="width: 90px" @click="handleReset(clearFilters)">
+        <a-button
+          size="small"
+          style="width: 90px"
+          @click="handleReset(clearFilters)"
+        >
           重置
         </a-button>
       </div>
@@ -27,14 +39,18 @@
     <template #filterIcon="filtered">
       <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
     </template>
-      <template #customRender="{ text, column }">
+    <template #customRender="{ text, column }">
       <span v-if="searchText && searchedColumn === column.dataIndex">
         <template
           v-for="(fragment, i) in text
             .toString()
             .split(new RegExp(`(?<=${searchText})|(?=${searchText})`, 'i'))"
         >
-          <mark v-if="fragment.toLowerCase() === searchText.toLowerCase()" class="highlight" :key="i">
+          <mark
+            v-if="fragment.toLowerCase() === searchText.toLowerCase()"
+            class="highlight"
+            :key="i"
+          >
             {{ fragment }}
           </mark>
           <template v-else>{{ fragment }}</template>
@@ -50,17 +66,19 @@
       </span>
     </template>
     <template #moreOperations="{ record }">
-
       <Tooltip title="修改">
-      <EditTwoTone @click="modify(record)"/>
+        <EditTwoTone @click="modify(record)" />
       </Tooltip>
-      <divide type="vertical"/>
+      <divide type="vertical" />
       <Tooltip title="删除">
-      <DeleteTwoTone @click="deleteHosts(record)"/>
+        <DeleteTwoTone @click="deleteHosts(record)" />
       </Tooltip>
-      <divide type="vertical"/>
-      <Tooltip title="终端交互" @click="openConsole(record)">
-      <InteractionTwoTone/>
+      <divide type="vertical" />
+      <Tooltip
+        title="终端交互"
+        @click="openConsole(record)"
+      >
+        <InteractionTwoTone />
       </Tooltip>
     </template>
   </a-table>
@@ -95,7 +113,7 @@ export default {
       searchInput: null,
       searchedColumn: '',
       selectIds: [],
-      rowSelections:{
+      rowSelections: {
         onChange: (selectedRowKeys, selectedRows) => {
           console.log(1, selectedRowKeys);
           console.log(11, selectedRows);
@@ -241,7 +259,7 @@ export default {
     delOnOK: function(ids){
       const data = ids.map(id => ({id}));
       // 此处需要转JSON，不然不会携带 Content-Type
-      this.http.delete("/api/host", { headers: { "Content-Type": "application/json" }, data: JSON.stringify(data) }).then(({ data }) => {
+      this.http.delete("/api/cluster", { headers: { "Content-Type": "application/json" }, data: JSON.stringify(data) }).then(({ data }) => {
         message.success(data);
       }).catch(()=>{
         message.error("删除失败。");
@@ -286,15 +304,16 @@ export default {
     },
     fetch(params={}){
       this.loading = true;
-      this.http.get("/api/host", params).then(({data})=>{
+      this.http.get("/api/cluster", params).then(({data})=>{
         this.data = data;
-      let names = [];
-      data.forEach((item)=>{
-          if(!names.includes(item.hostgroup)){
-            names.push(item.hostgroup);
-          }
-        });
-        this.columns[1].filters = names.map((item)=>({text:item, value:item}));
+        console.log(data);
+      // let names = [];
+      // data.forEach((item)=>{
+      //     if(!names.includes(item.hostgroup)){
+      //       names.push(item.hostgroup);
+      //     }
+      //   });
+      //   this.columns[1].filters = names.map((item)=>({text:item, value:item}));
       }).finally(()=>{
         this.loading = false;
       });

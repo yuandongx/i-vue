@@ -1,11 +1,11 @@
 <template>
-    <b-table
-        :rowSelection="rowSelections"
-        :loading="loading"
-        :data-source="hosts"
-        :columns="columns"
-        :rowKey="recoder => recoder.id">
-    </b-table>
+  <b-table
+    :row-selection="rowSelections"
+    :loading="loading"
+    :data-source="hosts"
+    :columns="columns"
+    :row-key="recoder => recoder.id"
+  />
 </template>
 <script>
 import { Table } from "ant-design-vue";

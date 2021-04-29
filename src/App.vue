@@ -1,15 +1,15 @@
 <template>
   <!-- <Window />  直接用路由来导航-->
-  <router-view name="login"></router-view>
-  <router-view name="windows"></router-view>
-  <router-view name="ssh"></router-view>
+  <div>
+    <router-view name="login" />
+    <router-view name="windows" />
+    <router-view name="ssh" />
+  </div>
 </template>
-// <!-- 这个也没有必要了， 先注释掉，后续用不上了可删除了-->
 <script>
 
 export default {
   props: {
-    
         next: {
             type: String,
             default: "111111111111",

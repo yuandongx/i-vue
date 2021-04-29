@@ -1,5 +1,5 @@
 <template>
-    <span style="margin-right: 24px">
+  <span style="margin-right: 24px">
     <a-badge :count="1">
       <a-avatar size="larg">
         <template #icon><UserOutlined /></template>

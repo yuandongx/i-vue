@@ -1,5 +1,5 @@
 <template>
-    <login-form @next="goNext"/>
+  <login-form @next="goNext" />
 </template>
 <script>
 import loginForm from "./theForm.vue";

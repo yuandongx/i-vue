@@ -4,7 +4,7 @@
     style="min-height: 100vh"
   >
     <a-layout-sider
-      v-model:collapsed="menu_collapsed"
+      :collapsed="menu_collapsed"
       :trigger="null"
       collapsible
       style="{ overflow: 'auto', height: '2000vh', position: 'fixed', left: 0}"
@@ -24,7 +24,7 @@
           minHeight: '280px'
         }"
       >
-        <router-view name="center"></router-view>
+        <router-view name="center" />
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -34,11 +34,16 @@
 import Left from "./Left.vue";
 import Header from "./Top";
 import { createNamespacedHelpers } from "vuex";
+import { Layout } from "ant-design-vue";
 const { mapState } = createNamespacedHelpers("menu");
 export default {
   components: {
     "the-left": Left,
     "the-header": Header,
+    "a-layout": Layout,
+    "a-layout-content": Layout.Content,
+    "a-layout-header": Layout.Header,
+    "a-layout-sider": Layout.Sider
   },
   data() {
     return {
