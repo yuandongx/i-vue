@@ -18,21 +18,10 @@
       :wrapper-col="wrapperCol"
       @finishFailed="addFinishFailed"
     >
-      <a-form-item
-        name="hostname"
-        label="主机名"
-        has-feedback
-      >
-        <a-input
-          v-model:value="form.hostname"
-          autocomplete="off"
-        />
+      <a-form-item name="hostname" label="主机名" has-feedback>
+        <a-input v-model:value="form.hostname" autocomplete="off" />
       </a-form-item>
-      <a-form-item
-        name="hostgroup"
-        label="主机组"
-        has-feedback
-      >
+      <a-form-item name="hostgroup" label="主机组" has-feedback>
         <a-select
           placeholder="请选择主机组"
           v-model:value="form.hostgroup"
@@ -55,72 +44,34 @@
                 @cancel="handleNewGroupCancle"
                 title="新加主机组"
               >
-                <a-input
-                  v-model:value="new_group"
-                  placeholder="新主机组名"
-                />
+                <a-input v-model:value="new_group" placeholder="新主机组名" />
               </a-modal>
             </div>
           </template>
-          <a-select-option
-            v-for="g in groups"
-            :key="g"
-          >
-            {{
-              g
-            }}
+          <a-select-option v-for="g in groups" :key="g">
+            {{ g }}
           </a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item
-        name="hostip"
-        label="主机地址"
-        required
-        has-feedback
-      >
-        <a-input
-          v-model:value="form.hostip"
-          autocomplete="off"
-        />
+      <a-form-item name="hostip" label="主机地址" required has-feedback>
+        <a-input v-model:value="form.hostip" autocomplete="off" />
       </a-form-item>
-      <a-form-item
-        name="port"
-        label="端口"
-        has-feedback
-      >
-        <a-input-number
-          v-model:value="form.port"
-          autocomplete="off"
-        />
+      <a-form-item name="port" label="端口" has-feedback>
+        <a-input-number v-model:value="form.port" autocomplete="off" />
       </a-form-item>
-      <a-form-item
-        name="credential"
-        label="访问凭证"
-        has-feedback
-      >
+      <a-form-item name="credential" label="访问凭证" has-feedback>
         <a-select
           placeholder="请选择访问凭证"
           v-model:value="form.credential"
           show-search
         >
-          <a-select-option
-            v-for="item in credentials"
-            :key="item"
-          >
-            {{
-              item
-            }}
+          <a-select-option v-for="item in credentials" :key="item">
+            {{ item }}
           </a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item
-        name="description"
-        label="描述信息"
-      >
-        <a-textarea
-          v-model:value="form.description"
-          autocomplete="off"
-        />
+      <a-form-item name="description" label="描述信息">
+        <a-textarea v-model:value="form.description" autocomplete="off" />
       </a-form-item>
     </a-form>
   </a-modal>
@@ -242,9 +193,9 @@ export default {
       try {
         let response = null;
         if (this.form.id !== undefined) {
-          response = await this.http.patch("/api/cluster", this.form);
+          response = await this.http.post("/v1/cluster/update", this.form);
         } else {
-          response = await this.http.post("/api/cluster", this.form);
+          response = await this.http.post("/v1/cluster/add", this.form);
         }
         message.success(response.data);
         this.$emit("redisplay");
