@@ -6,8 +6,6 @@ import router from "./libs/router";
 import store from "./store";
 
 
-const app = createApp(App).use(router)
-            .use(router)
-            .use(store);
+const app = createApp(App).use(router).use(store);
 app.config.globalProperties.http =  axios;
 app.mount("#app");

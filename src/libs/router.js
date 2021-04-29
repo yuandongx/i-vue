@@ -10,8 +10,8 @@ function getMenuItems(items) {
     const router = {
       name: item.name,
       path: item.path,
-      components: {center: () => import("../components"+item.path+"/index.vue")}
-      // component: () => import(`../components${item.path}/index.vue`)
+      // components: {center: () => import("../components"+item.path+"/index.vue")}
+      component: () => import(`../components${item.path}/index.vue`)
     };
     // console.log(`../components${item.path}/index.vue`);
     if (item.children !== undefined && item.children.length > 0) {

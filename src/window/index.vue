@@ -24,7 +24,7 @@
           minHeight: '280px'
         }"
       >
-        <router-view name="center" />
+        <router-view />
       </a-layout-content>
     </a-layout>
   </a-layout>

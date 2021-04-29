@@ -1,9 +1,9 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <router-view name="login" />
+    <router-view name="windows" />
+    <router-view name="ssh" />
   </div>
-  <router-view/>
 </template>
 
 <style lang="less">

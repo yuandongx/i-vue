@@ -21,15 +21,18 @@ const menus = [
     icon: ClusterOutlined,
     children: [
         {
-            name: "linux",
+            name: "cluster-linux",
+            title: "linux PC",
             path: "/cluster/linux",
         },
         {
-            name: "firewall",
+            name: "cluster-firewall",
+            title: "防火墙",
             path: "/cluster/firewall",
         },
         {
-            name: "router",
+            name: "cluster-router",
+            title: "路由器",
             path: "/cluster/router",
         }
     ]
