@@ -35,9 +35,9 @@ const routes = [{
   props: {login: route => ({next: route.query.next})} // 命名视图要有自己的props配置（login对应的配置）
 },
 {
-  name: "windows",
+  name: "views",
   path: "/",
-  components: {windows: () => import("../window/index.vue")},
+  components: {views: () => import("../views/index.vue")},
   children: getMenuItems(Items),
 }]
 const router = createRouter({

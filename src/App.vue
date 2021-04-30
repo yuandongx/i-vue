@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-view name="login" />
-    <router-view name="windows" />
+    <router-view name="views" />
     <router-view name="ssh" />
   </div>
 </template>
